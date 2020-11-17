@@ -22,8 +22,8 @@ public class appclass {
 	
 	
 	public static void main(String[] args) throws ParseException {
-		LocalDate ld =LocalDate.of(2021, 1, 30); 
-		LocalDate ld1 =LocalDate.of(2020, 11, 01); 
+		LocalDate ld1 =LocalDate.of(2021, 1, 30); 
+		LocalDate ld =LocalDate.of(2020, 11, 01); 
 		
 		//create objects and save in file
 		Course foo1=new Course("Cz2002","OOPD","lec");
