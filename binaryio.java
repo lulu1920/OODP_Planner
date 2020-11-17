@@ -6,36 +6,34 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
-
 
 public class binaryio {
 	public static ArrayList<Object> readSerializedObject(String filename) {
-		ArrayList<Object> pDetails = new ArrayList<Object>();
-		Object obj = null;
+		ArrayList<Object> Details = new ArrayList<Object>();
+		Object obj=null;
 		try {
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(filename));
 			while ((obj = o.readObject()) != null) {
-	            pDetails.add(obj);
+	            Details.add(obj);
 	        }
-			//pDetails = (ArrayList) o.readObject();
 			o.close();
 		} catch (IOException ex) {
 			System.out.print("");
 		} catch (ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
-		return pDetails;
+		return Details;
 	}
 	
 	public static void writeSerializedObject(String filename, Object write) {
-		ArrayList<Object> pDetails = new ArrayList<Object>();
+		ArrayList<Object> Details = new ArrayList<Object>();
 		Object obj = null;
 		try {
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(filename));
 			while ((obj = o.readObject()) != null) {
-				System.out.print(obj);
-	            pDetails.add(obj);
+	            Details.add(obj);
 	        }
 			o.close();
 		} catch (IOException ex) {
@@ -44,13 +42,27 @@ public class binaryio {
 			ex.printStackTrace();
 		}
 		try {
-			pDetails.add(write);
+			Details.add(write);
 			ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(filename));
-			o.writeObject(pDetails);
+			for (int i = 0 ; i <Details.size() ; i++) {
+				o.writeObject((Object)Details.get(i));
+			}
 			o.close();
 		} catch (IOException ex) {
 			System.out.print("");
 		}
 		
+	}
+
+	public static void clearwriteSerializedObject(String filename, ArrayList<Object> Details) {
+		try {
+			ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(filename));
+			for (int i = 0 ; i <Details.size() ; i++) {
+				o.writeObject((Object)Details.get(i));
+			}
+			o.close();
+		} catch (IOException ex) {
+			System.out.print("");
+		}
 	}
 }

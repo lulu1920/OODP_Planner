@@ -14,35 +14,50 @@ public class User implements Serializable {
 	String password;
 	boolean admin;
 	
-	static Scanner input = new Scanner(System.in);
+	public User() {
+		name=null;
+		username =null;
+		password = null;
+		admin = false;
+	}
 	
 	public User(String nam,String un, String pw, boolean ad) {
 		name=nam;
 		username =un;
 		password = pw;
 		admin = ad;
-	}
-		
-	/*
-	 * login(string username, string password): bool
-	+ logout(): void
-	+ print student menu
-	+ print admin menu
-	 */
-	public boolean login(String un, String pw) {
-		if(un.equals(username) &&pw.equals(password))
-			return true;
-		else 
-			return false;
+		binaryio.writeSerializedObject("users.dat",this);
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String un) {
+		 username=un;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String nam) {
+		 name=nam;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String pw) {
+		password=pw;
+	}
 	public boolean getAdmin() {
 		return admin;
 	}
 
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return username;
+	public void setAdmin(boolean ad) {
+		admin=ad;
 	}
 	
 }

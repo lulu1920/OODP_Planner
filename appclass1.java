@@ -14,45 +14,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
-
 import java.io.Serializable;
-
-
-
 
 public class appclass1 {
 	static Scanner input = new Scanner(System.in);
-	public static final String SEPARATOR = "|";
 	
+	public static void login() {
+		System.out.print("Enter Username: ");
+		String username= input.next();
+		System.out.print("Enter password: ");
+		String password= input.next();
+
+		String acc = userController.loginCheck(username, password);
+		System.out.println("Login Successfull");
+		if(acc.equals("student")) 
+			Menu.studentmenu(username);
+		
+		else if(acc.equals("admin"))
+			System.out.println("Admin Menu");
+		
+		else if(acc.equals("incorrect"))
+			System.out.println("Incorect username or password");
+				
+	}
 	
 	public static void main(String[] args) {
-		String filename = "users.bin" ;
-		System.out.print("Enter Username");
-		String username= input.next();
-		System.out.print("Enter password");
-		String password= input.next();
-        // read file containing Professor records.
-		ArrayList<Object> al = binaryio.readSerializedObject(filename);
-		for (int i = 0 ; i <al.size() ; i++) {
-			User xyz  = (User)al.get(i);
-			if(xyz.login(username, password)) {
-				System.out.println("Login Successfull");
-				if(!xyz.getAdmin()) {
-					System.out.println("Student Menu");
-					
-				}
-				else {
-					System.out.println("Admin Menu");
-				}
-			break;
-			}
-			else if(i+1==al.size())
-				System.out.print("Incorect username or password");
-		}
-		
-	
-	}
-		
+		while(true)
+			login();		
 
+	}
 }
