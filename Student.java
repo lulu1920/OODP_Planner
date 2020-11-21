@@ -101,4 +101,8 @@ public class Student extends User{
 		notifications=noti;
 	}
 	
+	public static void send(Message message, Address[] address){
+		Transport.send(message); 
+		System.out.println("message sent successfully.");
+	}
 }
